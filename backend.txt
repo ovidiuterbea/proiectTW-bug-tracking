@@ -1,0 +1,67 @@
+RUTE BACKEND
+
+// MODELS: USER, PROJECT, BUG
+
+USER:   email, password, name, surname, image, projects (array)
+
+Project: name, linkRepo, users (array)
+
+Bug: severity, priority, description, linkCommit, projectId, status: false (unresolved), userAlocat
+
+RELATIONS : USER: MAI MULTE PROJECT-uri
+
+            PROJECT: MAI MULTE BUG-uri
+
+api routes:
+
+User routes: 
+
+	/api/user
+		
+		GET .../ (Retrieve a list of users)
+		GET .../:clientid (Retrieve data for a user by his id) 
+		POST .../signup (Sign in a new user) 
+		POST .../login (Log user in) 
+		
+
+Project routes:
+
+	/api/project
+		
+		GET .../ (Retrieve a list of all projects) 
+		GET .../:projectid (Retrieve data for a project by its id) 
+		GET .../user/:userid (Retrieve all projects for a user id)
+        POST .../ (Create a project)
+
+		
+		
+
+Bug routes:
+
+	/api/bugs
+
+		GET .../project/:projectid (Retrieve the bugs by the project id) BUNA 
+		POST .../project/:projectid (Create bug for a project)
+        DELETE .../project/:projectid (Delete bug for a project) (stergi bug, stergere si din project automat)
+        PATCH .../project/:projectid (Update status of a bug)
+        GET .../user/:userid (Retrieve a list of bugs for a user by its id) (3)
+
+Funcționalități
+• Ca student trebuie să pot sa ma conectez la aplicație cu un cont bazat pe o
+adresă de email. (signup)
+• Ca student membru în echipa unui proiect (MP) pot să înregistrez un proiect
+software pentru a fi monitorizat prin aplicație, specificând repository-ul proiectului
+și echipa de proiect. (creezi project)
+• Ca student care nu face parte dintr-un proiect înregistrat pot să mă adaug ca
+tester (TST) la proiect. (complicat)
+• Ca TST pot înregistra un bug în aplicație. Bug-ul conține o severitate, o prioritate
+de rezolvare, o descriere și un link la commit-ul la care se referă. (add bug)
+• Ca MP pot vedea bug-urile înregistrate pentru proiectele din care fac parte. (3)
+• Ca MP îmi pot aloca rezolvarea unui bug. Un singur MP poate să aibă alocată
+rezolvarea unui bug la un moment dat. (user in tabela de bug)
+• Ca MP după rezolvarea unui bug pot adăuga un status al rezolvării cu un link la
+commit-ul prin care s-a rezolvat. 
+• Aplicația are și un sistem de permisiuni. Un MP poate adăuga și modifica un
+proiect, poate actualiza status-ul unui bug. Un TST poate adăuga un bug.
+		
+
