@@ -40,7 +40,7 @@ Bug routes:
 
 	/api/bugs
 
-		GET .../project/:projectid (Retrieve the bugs by the project id) BUNA 
+		GET .../project/:projectid (Retrieve the bugs by the project id) 
 		POST .../project/:projectid (Create bug for a project)
         DELETE .../project/:projectid (Delete bug for a project) (stergi bug, stergere si din project automat)
         PATCH .../project/:projectid (Update status of a bug)
