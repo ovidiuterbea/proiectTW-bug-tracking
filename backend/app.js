@@ -30,3 +30,5 @@ mongoose
     console.log(err);
     console.log("Couldn't connect to the bug-tracking database.");
   });
+
+// CEVA
