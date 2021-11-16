@@ -1,0 +1,13 @@
+SPA PAGES
+
+/authenticate -> Signup + Login -> neautentificat
+
+/projects -> Lista tuturor proiectelor -> autentificat
+
+/:projectid/bugs -> Lista de bug-uri pentru un proiect  -> autentificat
+
+/:userid/projects -> Lista de proiecte pentru un user -> autentificat
+
+/projects/new -> Form pentru un proiect nou -> autentificat
+
+/:projectid/new -> Form pentru un nou bug -> autentificat
