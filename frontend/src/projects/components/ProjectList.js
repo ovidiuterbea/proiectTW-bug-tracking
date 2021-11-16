@@ -21,6 +21,7 @@ const ProjectList = (props) => {
             repo={project.repo}
             users={project.users}
             name={project.name}
+            isTester={project.isTester}
           />
         );
       })}
