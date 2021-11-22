@@ -1,6 +1,6 @@
 import React from "react";
 import "./ProjectItem.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const ProjectItem = (props) => {
   return (
