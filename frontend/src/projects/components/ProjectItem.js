@@ -13,14 +13,14 @@ const ProjectItem = (props) => {
           <button>Go to repo</button>
         </a>
         {props.isTester && (
-          <Link>
-            <button>Buton catre creeare bug</button>
-          </Link>
+          // <Link>
+          <button>Buton catre creeare bug</button>
+          // </Link>
         )}
         {!props.isTester && (
-          <Link>
-            <button>Buton catre vizualizare proiect</button>
-          </Link>
+          // <Link>
+          <button>Buton catre vizualizare proiect</button>
+          // </Link>
         )}
       </div>
     </li>

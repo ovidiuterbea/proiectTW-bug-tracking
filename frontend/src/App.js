@@ -8,6 +8,7 @@ import {
 import Auth from "./users/pages/Auth";
 import NewProject from "./projects/pages/NewProject";
 import Projects from "./projects/pages/Projects";
+import UserProjects from "./projects/pages/UserProjects";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         </Route>
         <Route path='/projects' exact>
           <Projects />
+        </Route>
+        <Route path='/:userId/projects' exact>
+          <UserProjects />
         </Route>
         <Redirect to='/' />
       </Switch>
