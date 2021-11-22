@@ -42,6 +42,8 @@
   background-color: #5d5cbc;
   padding-top: 0.9rem;
   padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   color: #f3f3f3;
   height: 3rem;
   width: fit-content;
@@ -67,7 +69,7 @@
   font: inherit;
 }
 
-/* .nav-links button:focus {
+.nav-links button:focus {
   outline: none;
 }
 
@@ -75,4 +77,4 @@
 .nav-links button:active {
   background: #292929;
   color: white;
-} */
+}

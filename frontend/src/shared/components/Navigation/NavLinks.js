@@ -10,7 +10,7 @@ const NavLinks = (props) => {
 
   return (
     <div className='main-navigation'>
-      <h2>Bug tracking </h2>
+      <h3>Bug tracking </h3>
       <ul className='nav-links'>
         <li>
           <NavLink to='/u1/projects'>MY PROJECTS</NavLink>
