@@ -13,13 +13,13 @@ const NavLinks = (props) => {
       <h3>Bug tracking </h3>
       <ul className='nav-links'>
         <li>
-          <NavLink to='/u1/projects'>MY PROJECTS</NavLink>
+          <NavLink activeClassName="activeLink" to='/u1/projects'>MY PROJECTS</NavLink>
         </li>
         <li>
-          <NavLink to='/projects'>ALL PROJECTS</NavLink>
+          <NavLink activeClassName="activeLink" to='/projects'>ALL PROJECTS</NavLink>
         </li>
         <li>
-          <NavLink to='/projects/new'>NEW PROJECT</NavLink>
+          <NavLink activeClassName="activeLink" to='/projects/new'>NEW PROJECT</NavLink>
         </li>
 
         <li>

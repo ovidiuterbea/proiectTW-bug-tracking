@@ -34,6 +34,7 @@
 .nav-links a {
   color: #f3f3f3;
   text-decoration: none;
+  padding-bottom: 5px;
   /* padding: 0.5rem; */
 }
 
@@ -77,4 +78,8 @@
 .nav-links button:active {
   background: #292929;
   color: white;
+}
+
+.activeLink{
+  border-bottom: 3px solid #f3f3f3;   transition: border-bottom .5s ease-in-out;
 }
