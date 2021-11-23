@@ -20,7 +20,7 @@ function App() {
           <Route path='/' exact>
             <Auth />
           </Route>
-          <Route path='/project/new' exact>
+          <Route path='/projects/new' exact>
             <NewProject />
           </Route>
           <Route path='/projects' exact>
