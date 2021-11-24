@@ -1,5 +1,4 @@
 import React from "react";
-import "./ProjectList.css";
 import ProjectItem from "./ProjectItem";
 
 const ProjectList = (props) => {
@@ -12,7 +11,7 @@ const ProjectList = (props) => {
   }
 
   return (
-    <ul className='project-list'>
+    <ul>
       {props.items.map((project) => {
         return (
           <ProjectItem
@@ -22,6 +21,7 @@ const ProjectList = (props) => {
             users={project.users}
             name={project.name}
             isTester={project.isTester}
+            bugs={project.bugs}
           />
         );
       })}

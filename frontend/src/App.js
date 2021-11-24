@@ -10,6 +10,7 @@ import NewProject from "./projects/pages/NewProject";
 import Projects from "./projects/pages/Projects";
 import UserProjects from "./projects/pages/UserProjects";
 import NavLinks from "./shared/components/Navigation/NavLinks";
+import ProjectDetails from "./projects/pages/ProjectDetails";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path='/:userId/projects' exact>
             <UserProjects />
+          </Route>
+          <Route path='/:userId/projects/:projectId' exact>
+            <ProjectDetails />
           </Route>
           <Redirect to='/' />
         </Switch>
