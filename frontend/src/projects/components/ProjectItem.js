@@ -26,7 +26,7 @@ const ProjectItem = (props) => {
           </Link>
         )}
         {!props.isTester && (
-          <Link to={`/:userId/projects/${props.id}`}>
+          <Link to={`/:userId/projects/${props.id}/bugs`}>
             <Button id='muibtn' startIcon={<VisibilityIcon />}>
               view project details
             </Button>

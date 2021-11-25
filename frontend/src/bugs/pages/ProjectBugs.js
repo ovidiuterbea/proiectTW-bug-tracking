@@ -1,5 +1,4 @@
-import { useParams } from "react-router-dom";
-import "./ProjectDetails.css";
+import "./ProjectBugs.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Button } from "@mui/material";
 import BugList from "../../bugs/components/BugList";
@@ -35,7 +34,6 @@ const DUMMY_PROJECT = {
 };
 
 const ProjectDetails = (props) => {
-  const projectId = useParams().projectId;
   return (
     <li className='project-detail'>
       <div className='project-detail-container'>

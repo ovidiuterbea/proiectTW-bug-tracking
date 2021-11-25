@@ -7,11 +7,14 @@
   background-color: #5d5cbc;
   padding: 1.2rem;
   box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.3);
+  justify-content: center;
+  align-items: center;
 }
 
-.bug-item__buttons {
+.bug-item .bug-item__buttons {
   display: flex;
   justify-content: space-between;
+  gap: 8rem;
 }
 
 .bug-item .bug-item__description {
@@ -19,16 +22,11 @@
 }
 
 .bug-item .bug-item__description h2 {
-  justify-content: center;
-  align-items: center;
+  color: #f3f3f3;
 }
 
 a {
   text-decoration: none;
-}
-
-#projectName {
-  color: #f3f3f3;
 }
 
 #muibtn {
@@ -68,9 +66,4 @@ a {
   outline: none;
   justify-content: center;
   align-items: center;
-}
-
-.project-item__buttons .project-item__link:hover {
-  box-shadow: inset 250px 0 0 0 #7c7ac2;
-  cursor: pointer;
 }
