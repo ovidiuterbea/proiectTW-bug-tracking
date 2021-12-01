@@ -19,7 +19,7 @@ const ProjectItem = (props) => {
           </Button>
         </a>
         {props.isTester && (
-          <Link>
+          <Link to={`/:userId/projects/${props.id}/newBug`}>
             <Button id='muibtn' startIcon={<BugReportIcon />}>
               add bug
             </Button>

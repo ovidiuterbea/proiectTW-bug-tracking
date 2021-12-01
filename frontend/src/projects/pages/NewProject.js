@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useState } from "react";
 import {
   Card,
@@ -12,7 +12,7 @@ import {
 
 const NewProject = () => {
   const [users, setUsers] = useState([]);
-  const selectedUserInputRef = useRef();
+  const [enteredUser, setEnteredUser] = useState("");
   const [enteredProjectName, setEnteredProjectName] = useState("");
   const [enteredRepo, setEnteredRepo] = useState("");
 
@@ -24,10 +24,13 @@ const NewProject = () => {
     setEnteredRepo(event.target.value);
   };
 
-  const usersChangeHandler = () => {
-    const enteredUserRef = selectedUserInputRef.current.value;
-    setUsers((arr) => [...arr, enteredUserRef]);
-    console.log(enteredUserRef);
+  const enteredUserChangeHandler = (event) => {
+    setEnteredUser(event.target.value);
+  };
+
+  const usersChangeHandler = (event) => {
+    setUsers((arr) => [...arr, enteredUser]);
+    console.log(users);
   };
 
   const data = [
@@ -99,7 +102,7 @@ const NewProject = () => {
                           label='Users'
                           variant='outlined'
                           fullWidth
-                          ref={selectedUserInputRef}
+                          onBlur={enteredUserChangeHandler}
                         />
                       </div>
                     )}

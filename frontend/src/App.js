@@ -12,6 +12,7 @@ import UserProjects from "./projects/pages/UserProjects";
 import NavLinks from "./shared/components/Navigation/NavLinks";
 import ProjectBugs from "./bugs/pages/ProjectBugs";
 import BugDetails from "./bugs/pages/BugDetails";
+import NewBug from "./bugs/pages/NewBug";
 import { useState, useCallback } from "react";
 import { AuthContext } from "./shared/context/auth-context";
 
@@ -45,6 +46,9 @@ function App() {
         </Route>
         <Route path='/:userId/projects/:projectId/bugs/:bugId' exact>
           <BugDetails />
+        </Route>
+        <Route path='/:userId/projects/:projectId/newBug' exact>
+          <NewBug />
         </Route>
         <Redirect to='/' />
       </Switch>

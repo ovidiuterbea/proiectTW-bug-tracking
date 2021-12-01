@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useState } from "react";
 import {
   Card,
@@ -11,34 +11,58 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  FormControl,
 } from "@mui/material";
 
 const NewBug = () => {
-    //Bug: severity, priority, description, linkCommit, projectId, status: false (unresolved), userAlocat
-    //projectId, status, userAlocat
+  //Bug: severity, priority, description, linkCommit, projectId, status: false (unresolved), userAlocat
+  //projectId, status, userAlocat
 
-    const [enteredDescription, setEnteredDescription] = useState("");
-    const [enteredCommit, setEnteredCommit] = useState("");
-    const [enteredSeverity, setEnteredSeverity] = useState("");
-    const [enteredPriority, setEnteredPriority] = useState("");
+  const [enteredDescription, setEnteredDescription] = useState("");
+  const [enteredCommit, setEnteredCommit] = useState("");
+  const [enteredSeverity, setEnteredSeverity] = useState("");
+  const [enteredPriority, setEnteredPriority] = useState("");
+  const [enteredAlocUser, setEnteredAlocUser] = useState("");
 
-    const [status] = false;
+  const descriptionChangeHandler = (event) => {
+    setEnteredDescription(event.target.value);
+  };
 
-    const descriptionChangeHandler = (event) => {
-      setEnteredDescription(event.target.value);
+  const commitChangeHandler = (event) => {
+    setEnteredCommit(event.target.value);
+  };
+
+  const severityChangeHandler = (event) => {
+    setEnteredSeverity(event.target.value);
+  };
+
+  const priorityChangeHandler = (event) => {
+    setEnteredPriority(event.target.value);
+  };
+
+  const enteredAlocUserHandler = (event) => {
+    setEnteredAlocUser(event.target.value);
+  };
+
+  const formHandler = (event) => {
+    event.preventDefault();
+
+    const newBug = {
+      description: enteredDescription,
+      commit: enteredCommit,
+      severity: enteredSeverity,
+      priority: enteredPriority,
+      alocUser: enteredAlocUser,
     };
 
-    const commitChangeHandler = (event) => {
-      setEnteredCommit(event.target.value);
-    };
+    console.log(newBug);
+  };
 
-    const severityChangeHandler = (event) => {
-      setEnteredSeverity(event.target.value);
-    };
-
-    const priorityChangeHandler = (event) => {
-      setEnteredPriority(event.target.value);
-    };
+  const data = [
+    { name: "Tudor Delia" },
+    { name: "Udris Bogdan" },
+    { name: "Terbea Ovidiu" },
+  ];
 
   return (
     <div className='App'>
@@ -73,38 +97,49 @@ const NewBug = () => {
                   />
                 </Grid>
                 <Grid xs={12} item>
-                  <InputLabel id='selectPriorityLabel'>Priority</InputLabel>
-                  <Select
-                    labelId='selectPriorityLabel'
-                    id='selectPriority'
-                    value={priority}
-                    label='Priority'
-                    onChange={priorityChangeHandler}
-                    value={enteredPriority}
-                  >
-                    <MenuItem value={1}>High</MenuItem>
-                    <MenuItem value={2}>Moderate</MenuItem>
-                    <MenuItem value={3}>Low</MenuItem>
-                  </Select>
+                  <FormControl fullWidth>
+                    <InputLabel id='selectPriorityLabel'>Priority</InputLabel>
+                    <Select
+                      labelId='selectPriorityLabel'
+                      id='selectPriority'
+                      label='Priority'
+                      onChange={priorityChangeHandler}
+                      value={enteredPriority}
+                      fullWidth
+                      variant='outlined'
+                      required
+                    >
+                      <MenuItem value={1}>Low</MenuItem>
+                      <MenuItem value={2}>Moderate</MenuItem>
+                      <MenuItem value={3}>High</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid xs={12} item>
-                  <InputLabel id='selectSeverityLabel'>Severity Level</InputLabel>
-                  <Select
-                    labelId='selectSeverityLabel'
-                    id='selectSeverity'
-                    value={severity}
-                    label='Severity Level'
-                    onChange={severityChangeHandler}
-                    value={enteredSeverity}
-                  >
-                    <MenuItem value={1}>1</MenuItem>
-                    <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
-                    <MenuItem value={4}>4</MenuItem>
-                    <MenuItem value={5}>5</MenuItem>
-                  </Select>
+                  <FormControl fullWidth>
+                    <InputLabel id='selectSeverityLabel'>
+                      Severity Level
+                    </InputLabel>
+                    <Select
+                      placeholder='Enter severity level'
+                      labelId='selectSeverityLabel'
+                      id='selectSeverity'
+                      value={enteredSeverity}
+                      label='Severity Level'
+                      onChange={severityChangeHandler}
+                      fullWidth
+                      variant='outlined'
+                      required
+                    >
+                      <MenuItem value={1}>1</MenuItem>
+                      <MenuItem value={2}>2</MenuItem>
+                      <MenuItem value={3}>3</MenuItem>
+                      <MenuItem value={4}>4</MenuItem>
+                      <MenuItem value={5}>5</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Grid>
-                {/* <Grid xs={12} sm={8} item>
+                <Grid xs={12} sm={8} item>
                   <Autocomplete
                     id='combo-box-existent-users'
                     options={data}
@@ -120,12 +155,12 @@ const NewBug = () => {
                           label='Assigned user'
                           variant='outlined'
                           fullWidth
-                          ref={selectedUserInputRef}
+                          onBlur={enteredAlocUserHandler}
                         />
                       </div>
                     )}
                   />
-                </Grid> */}
+                </Grid>
                 <Grid item xs={12}>
                   <Button
                     type='submit'
