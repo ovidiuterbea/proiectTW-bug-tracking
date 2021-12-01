@@ -7,6 +7,7 @@ import {
   Grid,
   Button,
   Autocomplete,
+  Typography,
 } from "@mui/material";
 
 const NewProject = () => {
@@ -52,6 +53,9 @@ const NewProject = () => {
 
   return (
     <div className='App'>
+      <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
+        Add Project
+      </Typography>
       <Grid>
         <Card style={{ maxWidth: 450, padding: "20px 5px", margin: "0 auto" }}>
           <CardContent>
