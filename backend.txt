@@ -41,9 +41,9 @@ Bug routes:
 	/api/bugs
 
 		GET .../project/:projectid (Retrieve the bugs by the project id) 
-		POST .../project/:projectid (Create bug for a project)
+		POST .../project/:projectid (Create bug for a project) (creeaza bug, adauga in proiect)
         DELETE .../project/:projectid (Delete bug for a project) (stergi bug, stergere si din project automat)
-        PATCH .../project/:projectid (Update status of a bug)
+        PATCH .../bug/:bugid(Update status of a bug)
         GET .../user/:userid (Retrieve a list of bugs for a user by its id) (3)
 
 Funcționalități
