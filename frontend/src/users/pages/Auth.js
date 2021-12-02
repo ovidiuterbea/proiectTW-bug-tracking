@@ -165,11 +165,12 @@ const Auth = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <Button
-                    className='muibtn'
+                    //className='muibtn'
                     type='submit'
                     variant='contained'
                     color='primary'
                     fullWidth
+                    style={{backgroundColor:"#5d5cbc"}}
                   >
                     Submit
                   </Button>
@@ -178,15 +179,16 @@ const Auth = () => {
             </form>
           </CardContent>
         </Card>
-        <Typography align='center' style={{ marginTop: "1rem" }}>
+        <Typography align='center' style={{ marginTop: "1rem"}}>
           <Button
-            className='muibtn'
+            //className='muibtn'
             type=''
             variant='contained'
             color='primary'
             onClick={loginChangeHandler}
+            style={{backgroundColor:"#5d5cbc"}}
           >
-            Change Mode
+            {isLoginMode?'Sign Up':'Login'}
           </Button>
         </Typography>
       </Grid>
