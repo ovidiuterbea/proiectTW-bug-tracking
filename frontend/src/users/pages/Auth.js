@@ -13,6 +13,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
 const Auth = () => {
+  const [isLoginMode, setIsLoginMode] = useState(true);
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -36,32 +37,57 @@ const Auth = () => {
     setEnteredSurname(event.target.value);
   };
 
+  const loginChangeHandler = () => {
+    if (isLoginMode === true) {
+      setIsLoginMode(false);
+    } else {
+      setIsLoginMode(true);
+    }
+  };
+
   const authSubmitHandler = async (event) => {
     event.preventDefault();
     console.log(enteredEmail);
     console.log(enteredPassword);
-    try {
-      const responseData = await sendRequest(
-        "http://localhost:8000/api/users/signup",
-        "POST",
-        JSON.stringify({
-          name: enteredName,
-          surname: enteredSurname,
-          email: enteredEmail,
-          password: enteredPassword,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
-      );
-      auth.login(responseData.user.id);
-    } catch (err) {}
+    if (!isLoginMode) {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:8000/api/users/signup",
+          "POST",
+          JSON.stringify({
+            name: enteredName,
+            surname: enteredSurname,
+            email: enteredEmail,
+            password: enteredPassword,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        auth.login(responseData.user.id);
+      } catch (err) {}
+    } else {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:8000/api/users/login",
+          "POST",
+          JSON.stringify({
+            email: enteredEmail,
+            password: enteredPassword,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        auth.login(responseData.user.id);
+      } catch (err) {}
+    }
   };
 
   return (
     <div className='App'>
       <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
-        Log In
+        {isLoginMode ? "Login" : "Sign up"}
       </Typography>
       <Grid>
         <Card
@@ -85,30 +111,34 @@ const Auth = () => {
             </Typography>
             <form onSubmit={authSubmitHandler}>
               <Grid container spacing={1}>
-                <Grid item xs={12}>
-                  <TextField
-                    className='textField'
-                    type='text'
-                    placeholder='Enter name'
-                    label='Name'
-                    variant='outlined'
-                    fullWidth
-                    required
-                    onChange={nameChangeHandler}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    className='textField'
-                    type='text'
-                    placeholder='Enter surname'
-                    label='Surname'
-                    variant='outlined'
-                    fullWidth
-                    required
-                    onChange={surnameChangeHandler}
-                  />
-                </Grid>
+                {!isLoginMode && (
+                  <Grid item xs={12}>
+                    <TextField
+                      className='textField'
+                      type='text'
+                      placeholder='Enter name'
+                      label='Name'
+                      variant='outlined'
+                      fullWidth
+                      required
+                      onChange={nameChangeHandler}
+                    />
+                  </Grid>
+                )}
+                {!isLoginMode && (
+                  <Grid item xs={12}>
+                    <TextField
+                      className='textField'
+                      type='text'
+                      placeholder='Enter surname'
+                      label='Surname'
+                      variant='outlined'
+                      fullWidth
+                      required
+                      onChange={surnameChangeHandler}
+                    />
+                  </Grid>
+                )}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     className='textField'
@@ -148,6 +178,17 @@ const Auth = () => {
             </form>
           </CardContent>
         </Card>
+        <Typography align='center' style={{ marginTop: "1rem" }}>
+          <Button
+            className='muibtn'
+            type=''
+            variant='contained'
+            color='primary'
+            onClick={loginChangeHandler}
+          >
+            Change Mode
+          </Button>
+        </Typography>
       </Grid>
     </div>
   );

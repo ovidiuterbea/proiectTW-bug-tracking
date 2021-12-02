@@ -1,13 +1,21 @@
 .mainCardContainer {
-    max-width: 450;
-    padding: "20px 5px";
-    margin: "0 auto";
-    border-radius: "10px";
-    color:#f3f3f3;
+  max-width: 450;
+  padding: "20px 5px";
+  margin: "0 auto";
+  border-radius: "10px";
+  color: #f3f3f3;
+}
+
+.secondaryCardContainer {
+  max-width: 200;
+  padding: "20px 5px";
+  margin: "0 auto";
+  border-radius: "10px";
+  color: #f3f3f3;
 }
 
 .muibtn {
-    border: none;
+  border: none;
   background-color: #6967ce;
   color: #f3f3f3;
   border-radius: 10px;
@@ -17,6 +25,6 @@
 }
 
 .textField {
-    color: #f3f3f3;
-    border-color: #f3f3f3;
+  color: #f3f3f3;
+  border-color: #f3f3f3;
 }
