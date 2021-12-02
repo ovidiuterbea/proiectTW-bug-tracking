@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./Auth.css";
 import {
   Button,
@@ -10,12 +10,52 @@ import {
   Typography,
 } from "@mui/material";
 import { AuthContext } from "../../shared/context/auth-context";
+import { useHttpClient } from "../../shared/hooks/http-hook";
+
 const Auth = () => {
   const auth = useContext(AuthContext);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [enteredName, setEnteredName] = useState("");
+  const [enteredSurname, setEnteredSurname] = useState("");
 
-  const authSubmitHandler = (event) => {
+  const emailChangeHandler = (event) => {
+    setEnteredEmail(event.target.value);
+  };
+
+  const passwordChangeHandler = (event) => {
+    setEnteredPassword(event.target.value);
+  };
+
+  const nameChangeHandler = (event) => {
+    setEnteredName(event.target.value);
+  };
+
+  const surnameChangeHandler = (event) => {
+    setEnteredSurname(event.target.value);
+  };
+
+  const authSubmitHandler = async (event) => {
     event.preventDefault();
-    auth.login();
+    console.log(enteredEmail);
+    console.log(enteredPassword);
+    try {
+      const responseData = await sendRequest(
+        "http://localhost:8000/api/users/signup",
+        "POST",
+        JSON.stringify({
+          name: enteredName,
+          surname: enteredSurname,
+          email: enteredEmail,
+          password: enteredPassword,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      auth.login(responseData.user.id);
+    } catch (err) {}
   };
 
   return (
@@ -45,6 +85,30 @@ const Auth = () => {
             </Typography>
             <form onSubmit={authSubmitHandler}>
               <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <TextField
+                    className='textField'
+                    type='text'
+                    placeholder='Enter name'
+                    label='Name'
+                    variant='outlined'
+                    fullWidth
+                    required
+                    onChange={nameChangeHandler}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    className='textField'
+                    type='text'
+                    placeholder='Enter surname'
+                    label='Surname'
+                    variant='outlined'
+                    fullWidth
+                    required
+                    onChange={surnameChangeHandler}
+                  />
+                </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     className='textField'
@@ -54,6 +118,7 @@ const Auth = () => {
                     variant='outlined'
                     fullWidth
                     required
+                    onChange={emailChangeHandler}
                   />
                 </Grid>
                 <Grid xs={12} sm={6} item>
@@ -65,6 +130,7 @@ const Auth = () => {
                     variant='outlined'
                     fullWidth
                     required
+                    onChange={passwordChangeHandler}
                   />
                 </Grid>
                 <Grid item xs={12}>
