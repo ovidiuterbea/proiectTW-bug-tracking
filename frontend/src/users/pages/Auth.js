@@ -15,7 +15,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const auth = useContext(AuthContext);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { sendRequest } = useHttpClient();
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredName, setEnteredName] = useState("");
@@ -170,7 +170,7 @@ const Auth = () => {
                     variant='contained'
                     color='primary'
                     fullWidth
-                    style={{backgroundColor:"#5d5cbc"}}
+                    style={{ backgroundColor: "#5d5cbc" }}
                   >
                     Submit
                   </Button>
@@ -179,16 +179,16 @@ const Auth = () => {
             </form>
           </CardContent>
         </Card>
-        <Typography align='center' style={{ marginTop: "1rem"}}>
+        <Typography align='center' style={{ marginTop: "1rem" }}>
           <Button
             //className='muibtn'
             type=''
             variant='contained'
             color='primary'
             onClick={loginChangeHandler}
-            style={{backgroundColor:"#5d5cbc"}}
+            style={{ backgroundColor: "#5d5cbc" }}
           >
-            {isLoginMode?'Sign Up':'Login'}
+            {isLoginMode ? "Sign Up" : "Login"}
           </Button>
         </Typography>
       </Grid>

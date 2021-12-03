@@ -2,6 +2,9 @@ import "./ProjectBugs.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Button } from "@mui/material";
 import BugList from "../../bugs/components/BugList";
+import { useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 // import { Link } from "react-router-dom";
 // import BugReportIcon from "@mui/icons-material/BugReport";
 // import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -34,6 +37,23 @@ const DUMMY_PROJECT = {
 };
 
 const ProjectDetails = (props) => {
+  const projectId = useParams().projectId;
+  const [project, setProject] = useState(null);
+  const { sendRequest } = useHttpClient();
+  console.log("acesta este id-ul din url " + projectId);
+  useEffect(() => {
+    fetch(`http://localhost:8000/api/projects/${projectId}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setProject(data);
+      });
+  }, [sendRequest, projectId]);
+
+  console.log(project);
+  console.log(DUMMY_PROJECT);
+
   return (
     <li className='project-detail'>
       <div className='project-detail-container'>
@@ -48,7 +68,6 @@ const ProjectDetails = (props) => {
           </a>
         </div>
       </div>
-
       <BugList items={DUMMY_PROJECT.bugs} />
     </li>
   );

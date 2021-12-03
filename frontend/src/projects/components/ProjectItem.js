@@ -5,8 +5,11 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Button } from "@mui/material";
+import { AuthContext } from "../../shared/context/auth-context";
+import { useContext } from "react";
 
 const ProjectItem = (props) => {
+  const auth = useContext(AuthContext);
   return (
     <li className='project-item'>
       <div className='user-item__info'>
@@ -19,14 +22,14 @@ const ProjectItem = (props) => {
           </Button>
         </a>
         {props.isTester && (
-          <Link to={`/:userId/projects/${props.id}/newBug`}>
+          <Link to={`/${auth.userId}/projects/${props.id}/newBug`}>
             <Button id='muibtn' startIcon={<BugReportIcon />}>
               add bug
             </Button>
           </Link>
         )}
         {!props.isTester && (
-          <Link to={`/:userId/projects/${props.id}/bugs`}>
+          <Link to={`/${auth.userId}/projects/${props.id}/bugs`}>
             <Button id='muibtn' startIcon={<VisibilityIcon />}>
               view project details
             </Button>
