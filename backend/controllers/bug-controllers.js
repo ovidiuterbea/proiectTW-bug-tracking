@@ -215,8 +215,34 @@ const getBugsByUserId = async (req, res, next) => {
   });
 };
 
+const getBugById = async (req, res, next) => {
+  const bugId = req.params.bugid;
+
+  let bug;
+  try {
+    bug = await Bug.findById(bugId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not find a bug.",
+      500
+    );
+    return next(error);
+  }
+
+  if (!bug) {
+    const error = new HttpError(
+      "Could not find a bug for the provided id.",
+      404
+    );
+    return next(error);
+  }
+
+  res.json({ bug: bug.toObject({ getters: true }) });
+};
+
 exports.createBug = createBug;
 exports.getBugsByProjectId = getBugsByProjectId;
 exports.deleteBug = deleteBug;
 exports.updateStatus = updateStatus;
 exports.getBugsByUserId = getBugsByUserId;
+exports.getBugById = getBugById;

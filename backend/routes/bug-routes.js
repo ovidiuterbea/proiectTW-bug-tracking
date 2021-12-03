@@ -13,6 +13,8 @@ router.delete("/project/:projectid", bugController.deleteBug);
 
 router.patch("/bug/:bugid", bugController.updateStatus);
 
+router.get("/bug/:bugid", bugController.getBugById);
+
 router.get("/user/:userid", bugController.getBugsByUserId);
 
 module.exports = router;

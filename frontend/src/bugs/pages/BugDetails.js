@@ -2,21 +2,39 @@ import "./BugDetails.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import DoneIcon from "@mui/icons-material/Done";
 import { Button } from "@mui/material";
-import React from "react";
+import { useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 
 const BugDetails = (props) => {
+  const bugId = useParams().bugId;
+  const [loadedBugFetch, setLoadedBugFetch] = useState();
+  const { sendRequest } = useHttpClient();
+  useEffect(() => {
+    const fetchBug = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:8000/api/bugs/bug/${bugId}`
+        );
+        setLoadedBugFetch(responseData.bug);
+      } catch (err) {}
+    };
+    fetchBug();
+  }, [sendRequest, bugId]);
+  console.log(loadedBugFetch);
   return (
     <div className='bug-detail'>
       <div className='center'>
-        <h2 className='bug-title'>Bug Detail</h2>
+        <h2 className='bug-title'>Bug Details</h2>
       </div>
-      <h3 className='bug-text-margin'>Priority: High</h3>
-      <h3 className='bug-text-margin'>Severity Level: 4 </h3>
+      <h3 className='bug-text-margin'>Priority: {loadedBugFetch.priority}</h3>
       <h3 className='bug-text-margin'>
-        Description: Some idiot forgot to resolve the conflict between different
-        commits and the manager is going to nuke us, God help us all.
+        Severity Level: {loadedBugFetch.severity}{" "}
       </h3>
-      <h3 className='bug-text-margin'>Status: Unresolved </h3>
+      <h3 className='bug-text-margin'>
+        Description: {loadedBugFetch.description}
+      </h3>
+      <h3 className='bug-text-margin'>Status: {loadedBugFetch.status} </h3>
       <h3 className='bug-text-margin'>
         Person who is working on the bug: Tudor Delia{" "}
       </h3>
