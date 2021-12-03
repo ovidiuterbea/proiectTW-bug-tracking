@@ -9,6 +9,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 const BugDetails = (props) => {
   const bugId = useParams().bugId;
   const [loadedBugFetch, setLoadedBugFetch] = useState();
+  const [loadedUserFetch, setLoadedUserFetch] = useState();
   const { sendRequest } = useHttpClient();
   useEffect(() => {
     const fetchBug = async () => {
@@ -20,8 +21,18 @@ const BugDetails = (props) => {
       } catch (err) {}
     };
     fetchBug();
-  }, [sendRequest, bugId]);
+    const fetchUser = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:8000/api/users/${loadedBugFetch.user}`
+        );
+        setLoadedUserFetch(responseData.user);
+      } catch (err) {}
+    };
+    fetchUser();
+  }, [sendRequest, bugId, loadedBugFetch.user]);
   console.log(loadedBugFetch);
+  console.log(loadedUserFetch);
   return (
     <div className='bug-detail'>
       <div className='center'>
@@ -40,7 +51,9 @@ const BugDetails = (props) => {
         Status: {loadedBugFetch && loadedBugFetch.status}{" "}
       </h3>
       <h3 className='bug-text-margin'>
-        Person who is working on the bug: Tudor Delia{" "}
+        Person who is working on the bug:{" "}
+        {loadedUserFetch &&
+          loadedUserFetch.name + " " + loadedUserFetch.surname}
       </h3>
       <div className='project-item__buttons'>
         <a href={props.repo}>
