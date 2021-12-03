@@ -20,17 +20,17 @@ User routes:
 		
 		GET .../ (Retrieve a list of users)
 		GET .../:clientid (Retrieve data for a user by his id) 
-		POST .../signup (Sign in a new user) 
-		POST .../login (Log user in) 
+		POST .../signup (Sign in a new user) DONE
+		POST .../login (Log user in) DONE
 		
 
 Project routes:
 
 	/api/project
 		
-		GET .../ (Retrieve a list of all projects) 
-		GET .../:projectid (Retrieve data for a project by its id) 
-		GET .../user/:userid (Retrieve all projects for a user id)
+		GET .../ (Retrieve a list of all projects) DONE
+		GET .../:projectid (Retrieve data for a project by its id) DONE
+		GET .../user/:userid (Retrieve all projects for a user id) DONE
         POST .../ (Create a project)
 
 		
