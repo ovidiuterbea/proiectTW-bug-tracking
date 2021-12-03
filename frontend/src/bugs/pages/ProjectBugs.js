@@ -39,7 +39,9 @@ const ProjectBugs = (props) => {
     <li className='project-detail'>
       <div className='project-detail-container'>
         <div className='user-item__info'>
-          <h2 id='projectName'>{loadedProjectFetch.name}</h2>
+          <h2 id='projectName'>
+            {loadedProjectFetch && loadedProjectFetch.name}
+          </h2>
         </div>
         <div className='project-item__buttons'>
           <a href={props.repo}>
@@ -49,7 +51,7 @@ const ProjectBugs = (props) => {
           </a>
         </div>
       </div>
-      <BugList items={loadedBugsFetch} />
+      {loadedBugsFetch && <BugList items={loadedBugsFetch} />}
     </li>
   );
 };

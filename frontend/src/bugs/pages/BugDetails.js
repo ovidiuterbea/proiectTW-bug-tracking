@@ -27,14 +27,18 @@ const BugDetails = (props) => {
       <div className='center'>
         <h2 className='bug-title'>Bug Details</h2>
       </div>
-      <h3 className='bug-text-margin'>Priority: {loadedBugFetch.priority}</h3>
       <h3 className='bug-text-margin'>
-        Severity Level: {loadedBugFetch.severity}{" "}
+        Priority: {loadedBugFetch && loadedBugFetch.priority}
       </h3>
       <h3 className='bug-text-margin'>
-        Description: {loadedBugFetch.description}
+        Severity Level: {loadedBugFetch && loadedBugFetch.severity}{" "}
       </h3>
-      <h3 className='bug-text-margin'>Status: {loadedBugFetch.status} </h3>
+      <h3 className='bug-text-margin'>
+        Description: {loadedBugFetch && loadedBugFetch.description}
+      </h3>
+      <h3 className='bug-text-margin'>
+        Status: {loadedBugFetch && loadedBugFetch.status}{" "}
+      </h3>
       <h3 className='bug-text-margin'>
         Person who is working on the bug: Tudor Delia{" "}
       </h3>
