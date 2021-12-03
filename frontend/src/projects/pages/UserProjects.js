@@ -21,7 +21,7 @@ const DUMMY_PROJECTS = [
 
 const UserProjects = () => {
   const userId = useParams().userId;
-  const [loadedProjectsTest, setLoadedProjectsTest] = useState();
+  const [loadedProjectsTest, setLoadedProjectsTest] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   useEffect(() => {
     const fetchProjects = async () => {
@@ -37,9 +37,7 @@ const UserProjects = () => {
     fetchProjects();
   }, [sendRequest, userId]);
 
-  const loadedProjects = DUMMY_PROJECTS.filter((project) =>
-    project.users.includes(userId)
-  );
+  let loadedProjects = loadedProjectsTest
 
   return <ProjectList items={loadedProjects} />;
 };
