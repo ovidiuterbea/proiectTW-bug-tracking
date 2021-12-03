@@ -20,9 +20,7 @@ const UserProjects = () => {
     fetchProjects();
   }, [sendRequest, userId]);
 
-  let loadedProjects = loadedProjectsFetch;
-
-  return <ProjectList items={loadedProjects} />;
+  return <ProjectList items={loadedProjectsFetch} />;
 };
 
 export default UserProjects;

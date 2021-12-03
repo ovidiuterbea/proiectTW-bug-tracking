@@ -18,8 +18,7 @@ const Projects = () => {
     fetchProjects();
   }, [sendRequest]);
 
-  let loadedProjects = loadedProjectsFetch;
-  return <ProjectList items={loadedProjects} />;
+  return <ProjectList items={loadedProjectsFetch} />;
 };
 
 export default Projects;

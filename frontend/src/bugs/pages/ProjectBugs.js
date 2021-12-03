@@ -36,23 +36,21 @@ const DUMMY_PROJECT = {
   ],
 };
 
-const ProjectDetails = (props) => {
+const ProjectBugs = (props) => {
   const projectId = useParams().projectId;
-  const [project, setProject] = useState(null);
+  const [loadedBugsFetch, setLoadedBugsFetch] = useState([]);
   const { sendRequest } = useHttpClient();
-  console.log("acesta este id-ul din url " + projectId);
   useEffect(() => {
-    fetch(`http://localhost:8000/api/projects/${projectId}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setProject(data);
-      });
+    const fetchBugs = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:8000/api/bugs/project/${projectId}`
+        );
+        setLoadedBugsFetch(responseData.bugs);
+      } catch (err) {}
+    };
+    fetchBugs();
   }, [sendRequest, projectId]);
-
-  console.log(project);
-  console.log(DUMMY_PROJECT);
 
   return (
     <li className='project-detail'>
@@ -68,9 +66,9 @@ const ProjectDetails = (props) => {
           </a>
         </div>
       </div>
-      <BugList items={DUMMY_PROJECT.bugs} />
+      <BugList items={loadedBugsFetch} />
     </li>
   );
 };
 
-export default ProjectDetails;
+export default ProjectBugs;
