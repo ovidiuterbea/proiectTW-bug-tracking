@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
+const Project = require("../models/project");
 
 // TESTAT
 const getUsers = async (req, res, next) => {
@@ -122,7 +123,35 @@ const login = async (req, res, next) => {
   });
 };
 
+const getUsersByProjectId = async (req, res, next) => {
+  const projectId = req.params.projectid;
+
+  let projectWithUsers;
+  try {
+    projectWithUsers = await Project.findById(projectId).populate("users");
+  } catch (err) {
+    const error = new HttpError(
+      "Fetching users failed, please try again later",
+      500
+    );
+    return next(error);
+  }
+
+  if (!projectWithUsers || projectWithUsers.users.length === 0) {
+    return next(
+      new HttpError("Could not find users for the provided project id.", 404)
+    );
+  }
+
+  res.json({
+    users: projectWithUsers.users.map((user) =>
+      user.toObject({ getters: true })
+    ),
+  });
+};
+
 exports.getUsers = getUsers;
 exports.getUserById = getUserById;
 exports.signup = signup;
 exports.login = login;
+exports.getUsersByProjectId = getUsersByProjectId;

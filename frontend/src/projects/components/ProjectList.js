@@ -1,7 +1,10 @@
 import React from "react";
 import ProjectItem from "./ProjectItem";
+import { useContext } from "react";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const ProjectList = (props) => {
+  const auth = useContext(AuthContext);
   if (props.items.length === 0) {
     return (
       <div className='center'>
@@ -10,9 +13,15 @@ const ProjectList = (props) => {
     );
   }
 
+  let testerCondition;
   return (
     <ul>
       {props.items.map((project) => {
+        if (project.users.includes(auth.userId)) {
+          testerCondition = false;
+        } else {
+          testerCondition = true;
+        }
         return (
           <ProjectItem
             key={project.id}
@@ -20,7 +29,7 @@ const ProjectList = (props) => {
             repo={project.repo}
             users={project.users}
             name={project.name}
-            isTester={project.isTester}
+            isTester={testerCondition}
             bugs={project.bugs}
           />
         );

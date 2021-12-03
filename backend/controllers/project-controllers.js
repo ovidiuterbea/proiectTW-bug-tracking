@@ -78,13 +78,6 @@ const getProjectsByUserId = async (req, res, next) => {
 
 // TESTAT
 const createProject = async (req, res, next) => {
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   return next(
-  //     new HttpError("Invalid inputs passed, please check your data.", 422)
-  //   );
-  // }
-
   const { name, repo, users } = req.body;
 
   const createdProject = new Project({

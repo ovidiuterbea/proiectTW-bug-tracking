@@ -15,7 +15,7 @@ const createBug = async (req, res, next) => {
     );
   }
 
-  const { description, severity, priority, commit, status } = req.body;
+  const { description, severity, priority, commit, status, user } = req.body;
 
   const projectId = req.params.projectid;
 
@@ -42,6 +42,7 @@ const createBug = async (req, res, next) => {
     commit,
     status: "UNRESOLVED",
     project: projectId,
+    user,
   });
 
   try {
