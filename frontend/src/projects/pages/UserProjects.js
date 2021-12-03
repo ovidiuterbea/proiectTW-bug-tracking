@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ProjectList from "../components/ProjectList";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 
 const DUMMY_PROJECTS = [
   {
@@ -20,6 +21,22 @@ const DUMMY_PROJECTS = [
 
 const UserProjects = () => {
   const userId = useParams().userId;
+  const [loadedProjectsTest, setLoadedProjectsTest] = useState();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:8000/api/projects/user/${userId}`
+        );
+        setLoadedProjectsTest(responseData.projects);
+        console.log(responseData.projects);
+        console.log(loadedProjectsTest);
+      } catch (err) {}
+    };
+    fetchProjects();
+  }, [sendRequest, userId]);
+
   const loadedProjects = DUMMY_PROJECTS.filter((project) =>
     project.users.includes(userId)
   );
