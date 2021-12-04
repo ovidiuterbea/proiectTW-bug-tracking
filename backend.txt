@@ -42,7 +42,7 @@ Bug routes:
 
 		GET .../project/:projectid (Retrieve the bugs by the project id) DONE
 		POST .../project/:projectid (Create bug for a project) (creeaza bug, adauga in proiect) DONE
-        DELETE .../project/:projectid (Delete bug for a project) (stergi bug, stergere si din project automat)
+        DELETE .../project/:projectid (Delete bug for a project) (stergi bug, stergere si din project automat) DONE
         PATCH .../bug/:bugid(Update status of a bug) DONE
         
 

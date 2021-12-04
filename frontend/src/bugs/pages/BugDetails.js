@@ -13,6 +13,7 @@ const BugDetails = (props) => {
   const [loadedBugFetch, setLoadedBugFetch] = useState();
   const [loadedUserFetch, setLoadedUserFetch] = useState();
   const [userId, setUserId] = useState("");
+  const [status, setStatus] = useState("");
   const { sendRequest } = useHttpClient();
   useEffect(() => {
     const fetchBug = async () => {
@@ -21,6 +22,7 @@ const BugDetails = (props) => {
           `http://localhost:8000/api/bugs/bug/${bugId}`
         );
         setLoadedBugFetch(responseData.bug);
+        setStatus(responseData.bug.status);
         setUserId(responseData.bug.user);
       } catch (err) {}
     };
@@ -55,6 +57,15 @@ const BugDetails = (props) => {
     } catch (err) {}
   };
 
+  const bugDeleteHandler = async () => {
+    try {
+      await sendRequest(
+        `http://localhost:8000/api/bugs/bug/${bugId}`,
+        "DELETE"
+      );
+    } catch (err) {}
+  };
+
   return (
     <div className='bug-detail'>
       <div className='center'>
@@ -83,16 +94,25 @@ const BugDetails = (props) => {
             View Commit on Github
           </Button>
         </a>
-        {userId === auth.userId && (
-          <a href={props.repo}>
-            <Button
-              id='muibtn'
-              startIcon={<DoneIcon />}
-              onClick={bugStatusUpdateHandler}
-            >
-              Resolve the bug
-            </Button>
-          </a>
+        {userId === auth.userId && status === "UNRESOLVED" && (
+          <Button
+            id='muibtn'
+            startIcon={<DoneIcon />}
+            onClick={bugStatusUpdateHandler}
+            style={{ margin: "1rem" }}
+          >
+            Resolve the bug
+          </Button>
+        )}
+        {status === "RESOLVED" && (
+          <Button
+            id='muibtn'
+            startIcon={<DoneIcon />}
+            onClick={bugDeleteHandler}
+            style={{ margin: "1rem" }}
+          >
+            Delete the bug
+          </Button>
         )}
       </div>
     </div>
