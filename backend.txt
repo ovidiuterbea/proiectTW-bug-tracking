@@ -19,7 +19,7 @@ User routes:
 	/api/user
 		
 		GET .../ (Retrieve a list of users) DONE
-		GET .../:clientid (Retrieve data for a user by his id) 
+		GET .../:clientid (Retrieve data for a user by his id) DONE
 		POST .../signup (Sign in a new user) DONE
 		POST .../login (Log user in) DONE
 		
@@ -43,8 +43,8 @@ Bug routes:
 		GET .../project/:projectid (Retrieve the bugs by the project id) DONE
 		POST .../project/:projectid (Create bug for a project) (creeaza bug, adauga in proiect) DONE
         DELETE .../project/:projectid (Delete bug for a project) (stergi bug, stergere si din project automat)
-        PATCH .../bug/:bugid(Update status of a bug)
-        GET .../user/:userid (Retrieve a list of bugs for a user by its id) (3)
+        PATCH .../bug/:bugid(Update status of a bug) DONE
+        
 
 Funcționalități
 • Ca student trebuie să pot sa ma conectez la aplicație cu un cont bazat pe o

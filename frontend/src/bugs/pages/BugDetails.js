@@ -39,6 +39,22 @@ const BugDetails = (props) => {
     fetchUser();
   }, [sendRequest, bugId, userId]);
 
+  const bugStatusUpdateHandler = async (event) => {
+    event.preventDefault();
+    try {
+      await sendRequest(
+        `http://localhost:8000/api/bugs/bug/${bugId}`,
+        "PATCH",
+        JSON.stringify({
+          status: "RESOLVED",
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+    } catch (err) {}
+  };
+
   return (
     <div className='bug-detail'>
       <div className='center'>
@@ -69,7 +85,11 @@ const BugDetails = (props) => {
         </a>
         {userId === auth.userId && (
           <a href={props.repo}>
-            <Button id='muibtn' startIcon={<DoneIcon />}>
+            <Button
+              id='muibtn'
+              startIcon={<DoneIcon />}
+              onClick={bugStatusUpdateHandler}
+            >
               Resolve the bug
             </Button>
           </a>

@@ -15,7 +15,7 @@ const createBug = async (req, res, next) => {
     );
   }
 
-  const { description, severity, priority, commit, status, user } = req.body;
+  const { description, severity, priority, commit, user } = req.body;
 
   const projectId = req.params.projectid;
 
@@ -129,13 +129,6 @@ const deleteBug = async (req, res, next) => {
 
 //TESTAT
 const updateStatus = async (req, res, next) => {
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   return next(
-  //     new HttpError("Invalid inputs passed, please check your data.", 422)
-  //   );
-  // }
-
   const bugId = req.params.bugid;
 
   let bug;
@@ -143,7 +136,7 @@ const updateStatus = async (req, res, next) => {
     bug = await Bug.findById(bugId);
   } catch (err) {
     const error = new HttpError(
-      "Something went wrong, could not update the bug.",
+      "Something went wrong, could not find the bug.",
       500
     );
     return next(error);
