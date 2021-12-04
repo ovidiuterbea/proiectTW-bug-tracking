@@ -9,19 +9,21 @@ import {
   Autocomplete,
   Typography,
 } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Slide from "@mui/material/Slide";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
 const NewProject = () => {
+  const auth = useContext(AuthContext);
   const [usersId, setUsersId] = useState([]);
   const [enteredUser, setEnteredUser] = useState("");
   const [enteredProjectName, setEnteredProjectName] = useState("");
@@ -84,7 +86,10 @@ const NewProject = () => {
           repo: enteredRepo,
           users: usersId,
         }),
-        { "Content-Type": "application/json" }
+        {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
+        }
       );
     } catch (err) {}
 

@@ -1,8 +1,11 @@
 const express = require("express");
+const checkAuth = require("../middleware/check-auth");
 
 const bugController = require("../controllers/bug-controllers");
 
 const router = express.Router();
+
+router.use(checkAuth);
 
 router.get("/project/:projectid", bugController.getBugsByProjectId);
 
