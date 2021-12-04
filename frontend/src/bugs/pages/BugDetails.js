@@ -6,6 +6,8 @@ import { useParams } from "react-router";
 import React, { useEffect, useState, useContext } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const BugDetails = (props) => {
   const auth = useContext(AuthContext);
@@ -14,7 +16,7 @@ const BugDetails = (props) => {
   const [loadedUserFetch, setLoadedUserFetch] = useState();
   const [userId, setUserId] = useState("");
   const [status, setStatus] = useState("");
-  const { sendRequest } = useHttpClient();
+  const { sendRequest, isLoading } = useHttpClient();
   useEffect(() => {
     const fetchBug = async () => {
       try {
@@ -79,55 +81,64 @@ const BugDetails = (props) => {
   };
 
   return (
-    <div className='bug-detail'>
-      <div className='center'>
-        <h2 className='bug-title'>Bug Details</h2>
-      </div>
-      <h3 className='bug-text-margin'>
-        Priority: {loadedBugFetch && loadedBugFetch.priority}
-      </h3>
-      <h3 className='bug-text-margin'>
-        Severity Level: {loadedBugFetch && loadedBugFetch.severity}
-      </h3>
-      <h3 className='bug-text-margin'>
-        Description: {loadedBugFetch && loadedBugFetch.description}
-      </h3>
-      <h3 className='bug-text-margin'>
-        Status: {loadedBugFetch && loadedBugFetch.status}
-      </h3>
-      <h3 className='bug-text-margin'>
-        Person who is working on the bug:
-        {loadedUserFetch &&
-          " " + loadedUserFetch.name + " " + loadedUserFetch.surname}
-      </h3>
-      <div className='project-item__buttons'>
-        <a href={props.repo}>
-          <Button id='muibtn' startIcon={<GitHubIcon />}>
-            View Commit on Github
-          </Button>
-        </a>
-        {userId === auth.userId && status === "UNRESOLVED" && (
-          <Button
-            id='muibtn'
-            startIcon={<DoneIcon />}
-            onClick={bugStatusUpdateHandler}
-            style={{ margin: "1rem" }}
-          >
-            Resolve the bug
-          </Button>
+    <React.Fragment>
+      <Stack alignItems='center'>
+        {isLoading && (
+          <CircularProgress size={100} style={{ marginTop: "2rem" }} />
         )}
-        {status === "RESOLVED" && (
-          <Button
-            id='muibtn'
-            startIcon={<DoneIcon />}
-            onClick={bugDeleteHandler}
-            style={{ margin: "1rem" }}
-          >
-            Delete the bug
-          </Button>
-        )}
-      </div>
-    </div>
+      </Stack>
+      {!isLoading && (
+        <div className='bug-detail'>
+          <div className='center'>
+            <h2 className='bug-title'>Bug Details</h2>
+          </div>
+          <h3 className='bug-text-margin'>
+            Priority: {loadedBugFetch && loadedBugFetch.priority}
+          </h3>
+          <h3 className='bug-text-margin'>
+            Severity Level: {loadedBugFetch && loadedBugFetch.severity}
+          </h3>
+          <h3 className='bug-text-margin'>
+            Description: {loadedBugFetch && loadedBugFetch.description}
+          </h3>
+          <h3 className='bug-text-margin'>
+            Status: {loadedBugFetch && loadedBugFetch.status}
+          </h3>
+          <h3 className='bug-text-margin'>
+            Person who is working on the bug:
+            {loadedUserFetch &&
+              " " + loadedUserFetch.name + " " + loadedUserFetch.surname}
+          </h3>
+          <div className='project-item__buttons'>
+            <a href={props.repo}>
+              <Button id='muibtn' startIcon={<GitHubIcon />}>
+                View Commit on Github
+              </Button>
+            </a>
+            {userId === auth.userId && status === "UNRESOLVED" && (
+              <Button
+                id='muibtn'
+                startIcon={<DoneIcon />}
+                onClick={bugStatusUpdateHandler}
+                style={{ margin: "1rem" }}
+              >
+                Resolve the bug
+              </Button>
+            )}
+            {status === "RESOLVED" && (
+              <Button
+                id='muibtn'
+                startIcon={<DoneIcon />}
+                onClick={bugDeleteHandler}
+                style={{ margin: "1rem" }}
+              >
+                Delete the bug
+              </Button>
+            )}
+          </div>
+        </div>
+      )}
+    </React.Fragment>
   );
 };
 

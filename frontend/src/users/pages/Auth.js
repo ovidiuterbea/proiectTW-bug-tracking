@@ -8,6 +8,8 @@ import {
   Grid,
   TextField,
   Typography,
+  CircularProgress,
+  Stack,
 } from "@mui/material";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useHttpClient } from "../../shared/hooks/http-hook";
@@ -15,7 +17,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const auth = useContext(AuthContext);
-  const { sendRequest } = useHttpClient();
+  const { sendRequest, isLoading } = useHttpClient();
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredName, setEnteredName] = useState("");
@@ -86,6 +88,11 @@ const Auth = () => {
 
   return (
     <div className='App'>
+      <Stack alignItems='center'>
+        {isLoading && (
+          <CircularProgress size={100} style={{ marginTop: "2rem" }} />
+        )}
+      </Stack>
       <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
         {isLoginMode ? "Login" : "Sign up"}
       </Typography>

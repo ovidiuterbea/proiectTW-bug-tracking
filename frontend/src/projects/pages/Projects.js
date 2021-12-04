@@ -3,11 +3,13 @@ import React, { useEffect, useState, useContext } from "react";
 import ProjectList from "../components/ProjectList";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Projects = () => {
   const auth = useContext(AuthContext);
   const [loadedProjectsFetch, setLoadedProjectsFetch] = useState([]);
-  const { sendRequest } = useHttpClient();
+  const { sendRequest, isLoading } = useHttpClient();
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -26,7 +28,18 @@ const Projects = () => {
     fetchProjects();
   }, [sendRequest, auth.token]);
 
-  return <ProjectList items={loadedProjectsFetch} />;
+  return (
+    <React.Fragment>
+      <Stack alignItems='center'>
+        {isLoading && (
+          <CircularProgress size={100} style={{ marginTop: "2rem" }} />
+        )}
+      </Stack>
+      {!isLoading && loadedProjectsFetch && (
+        <ProjectList items={loadedProjectsFetch} />
+      )}
+    </React.Fragment>
+  );
 };
 
 export default Projects;
