@@ -48,20 +48,20 @@ Bug routes:
 
 Funcționalități
 • Ca student trebuie să pot sa ma conectez la aplicație cu un cont bazat pe o
-adresă de email. (signup)
+adresă de email. (signup) DONE
 • Ca student membru în echipa unui proiect (MP) pot să înregistrez un proiect
 software pentru a fi monitorizat prin aplicație, specificând repository-ul proiectului
-și echipa de proiect. (creezi project)
+și echipa de proiect. (creezi project) DONE
 • Ca student care nu face parte dintr-un proiect înregistrat pot să mă adaug ca
-tester (TST) la proiect. (complicat)
+tester (TST) la proiect. DONE
 • Ca TST pot înregistra un bug în aplicație. Bug-ul conține o severitate, o prioritate
-de rezolvare, o descriere și un link la commit-ul la care se referă. (add bug)
-• Ca MP pot vedea bug-urile înregistrate pentru proiectele din care fac parte. (3)
+de rezolvare, o descriere și un link la commit-ul la care se referă. (add bug) DONE
+• Ca MP pot vedea bug-urile înregistrate pentru proiectele din care fac parte. (3) NOT DONE
 • Ca MP îmi pot aloca rezolvarea unui bug. Un singur MP poate să aibă alocată
-rezolvarea unui bug la un moment dat. (user in tabela de bug)
+rezolvarea unui bug la un moment dat. (user in tabela de bug) NOT DONE
 • Ca MP după rezolvarea unui bug pot adăuga un status al rezolvării cu un link la
-commit-ul prin care s-a rezolvat. 
+commit-ul prin care s-a rezolvat. SEMI-DONE
 • Aplicația are și un sistem de permisiuni. Un MP poate adăuga și modifica un
-proiect, poate actualiza status-ul unui bug. Un TST poate adăuga un bug.
+proiect, poate actualiza status-ul unui bug. Un TST poate adăuga un bug. DONE
 		
 

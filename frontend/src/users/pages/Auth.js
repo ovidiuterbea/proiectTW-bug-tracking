@@ -87,119 +87,128 @@ const Auth = () => {
   };
 
   return (
-    <div className='App'>
+    <React.Fragment>
       <Stack alignItems='center'>
         {isLoading && (
           <CircularProgress size={100} style={{ marginTop: "2rem" }} />
         )}
       </Stack>
-      <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
-        {isLoginMode ? "Login" : "Sign up"}
-      </Typography>
-      <Grid>
-        <Card
-          className='mainCardContainer'
-          style={{
-            backgroundColor: "#f3f3f3",
-            borderRadius: "10px",
-            maxWidth: 450,
-            padding: "20px 5px",
-            margin: "0 auto",
-          }}
-        >
-          <CardContent>
-            <Typography
-              variant='body2'
-              color='textSecondary'
-              component='p'
-              gutterBottom
-            >
-              Log In into the app using your email and password.
-            </Typography>
-            <form onSubmit={authSubmitHandler}>
-              <Grid container spacing={1}>
-                {!isLoginMode && (
-                  <Grid item xs={12}>
-                    <TextField
-                      className='textField'
-                      type='text'
-                      placeholder='Enter name'
-                      label='Name'
-                      variant='outlined'
-                      fullWidth
-                      required
-                      onChange={nameChangeHandler}
-                    />
-                  </Grid>
-                )}
-                {!isLoginMode && (
-                  <Grid item xs={12}>
-                    <TextField
-                      className='textField'
-                      type='text'
-                      placeholder='Enter surname'
-                      label='Surname'
-                      variant='outlined'
-                      fullWidth
-                      required
-                      onChange={surnameChangeHandler}
-                    />
-                  </Grid>
-                )}
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    className='textField'
-                    type='email'
-                    placeholder='Enter email'
-                    label='Email'
-                    variant='outlined'
-                    fullWidth
-                    required
-                    onChange={emailChangeHandler}
-                  />
-                </Grid>
-                <Grid xs={12} sm={6} item>
-                  <TextField
-                    className='textField'
-                    type='password'
-                    placeholder='Enter password'
-                    label='Password'
-                    variant='outlined'
-                    fullWidth
-                    required
-                    onChange={passwordChangeHandler}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    //className='muibtn'
-                    type='submit'
-                    variant='contained'
-                    color='primary'
-                    fullWidth
-                    style={{ backgroundColor: "#5d5cbc" }}
-                  >
-                    Submit
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </CardContent>
-        </Card>
-        <Typography align='center' style={{ marginTop: "1rem" }}>
-          <Button
-            //className='muibtn'
-            type=''
-            variant='contained'
-            color='primary'
-            onClick={loginChangeHandler}
-            style={{ backgroundColor: "#5d5cbc" }}
+      {!isLoading && (
+        <div className='App'>
+          <Typography
+            padding='1rem'
+            variant='h3'
+            align='center'
+            color='#f3f3f3'
           >
-            {isLoginMode ? "Sign Up" : "Login"}
-          </Button>
-        </Typography>
-      </Grid>
-    </div>
+            {isLoginMode ? "Login" : "Sign up"}
+          </Typography>
+          <Grid>
+            <Card
+              className='mainCardContainer'
+              style={{
+                backgroundColor: "#f3f3f3",
+                borderRadius: "10px",
+                maxWidth: 450,
+                padding: "20px 5px",
+                margin: "0 auto",
+              }}
+            >
+              <CardContent>
+                <Typography
+                  variant='body2'
+                  color='textSecondary'
+                  component='p'
+                  gutterBottom
+                >
+                  Log In into the app using your email and password.
+                </Typography>
+                <form onSubmit={authSubmitHandler}>
+                  <Grid container spacing={1}>
+                    {!isLoginMode && (
+                      <Grid item xs={12}>
+                        <TextField
+                          className='textField'
+                          type='text'
+                          placeholder='Enter name'
+                          label='Name'
+                          variant='outlined'
+                          fullWidth
+                          required
+                          onChange={nameChangeHandler}
+                        />
+                      </Grid>
+                    )}
+                    {!isLoginMode && (
+                      <Grid item xs={12}>
+                        <TextField
+                          className='textField'
+                          type='text'
+                          placeholder='Enter surname'
+                          label='Surname'
+                          variant='outlined'
+                          fullWidth
+                          required
+                          onChange={surnameChangeHandler}
+                        />
+                      </Grid>
+                    )}
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        className='textField'
+                        type='email'
+                        placeholder='Enter email'
+                        label='Email'
+                        variant='outlined'
+                        fullWidth
+                        required
+                        onChange={emailChangeHandler}
+                      />
+                    </Grid>
+                    <Grid xs={12} sm={6} item>
+                      <TextField
+                        className='textField'
+                        type='password'
+                        placeholder='Enter password'
+                        label='Password'
+                        variant='outlined'
+                        fullWidth
+                        required
+                        onChange={passwordChangeHandler}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Button
+                        //className='muibtn'
+                        type='submit'
+                        variant='contained'
+                        color='primary'
+                        fullWidth
+                        style={{ backgroundColor: "#5d5cbc" }}
+                      >
+                        Submit
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
+              </CardContent>
+            </Card>
+            <Typography align='center' style={{ marginTop: "1rem" }}>
+              <Button
+                //className='muibtn'
+                type=''
+                variant='contained'
+                color='primary'
+                onClick={loginChangeHandler}
+                style={{ backgroundColor: "#5d5cbc" }}
+              >
+                {isLoginMode ? "Sign Up" : "Login"}
+              </Button>
+            </Typography>
+          </Grid>
+        </div>
+      )}
+    </React.Fragment>
   );
 };
 
