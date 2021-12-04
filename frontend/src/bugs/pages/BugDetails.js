@@ -10,6 +10,7 @@ const BugDetails = (props) => {
   const bugId = useParams().bugId;
   const [loadedBugFetch, setLoadedBugFetch] = useState();
   const [loadedUserFetch, setLoadedUserFetch] = useState();
+  const [userId, setUserId] = useState("");
   const { sendRequest } = useHttpClient();
   useEffect(() => {
     const fetchBug = async () => {
@@ -18,21 +19,31 @@ const BugDetails = (props) => {
           `http://localhost:8000/api/bugs/bug/${bugId}`
         );
         setLoadedBugFetch(responseData.bug);
+        setUserId(responseData.bug.user);
       } catch (err) {}
     };
-    fetchBug();
     const fetchUser = async () => {
       try {
-        const responseData = await sendRequest(
-          `http://localhost:8000/api/users/${loadedBugFetch.user}`
-        );
-        setLoadedUserFetch(responseData.user);
+        if (userId) {
+          const responseData = await sendRequest(
+            `http://localhost:8000/api/users/${userId}`
+          );
+          setLoadedUserFetch(responseData.user);
+        }
       } catch (err) {}
     };
+
+    fetchBug();
     fetchUser();
-  }, [sendRequest, bugId, loadedBugFetch.user]);
+  }, [sendRequest, bugId, userId]);
+
+  console.log("acesta este");
   console.log(loadedBugFetch);
-  console.log(loadedUserFetch);
+  console.log("pauza");
+  if (loadedUserFetch) {
+    console.log(loadedUserFetch);
+  }
+
   return (
     <div className='bug-detail'>
       <div className='center'>
@@ -42,18 +53,18 @@ const BugDetails = (props) => {
         Priority: {loadedBugFetch && loadedBugFetch.priority}
       </h3>
       <h3 className='bug-text-margin'>
-        Severity Level: {loadedBugFetch && loadedBugFetch.severity}{" "}
+        Severity Level: {loadedBugFetch && loadedBugFetch.severity}
       </h3>
       <h3 className='bug-text-margin'>
         Description: {loadedBugFetch && loadedBugFetch.description}
       </h3>
       <h3 className='bug-text-margin'>
-        Status: {loadedBugFetch && loadedBugFetch.status}{" "}
+        Status: {loadedBugFetch && loadedBugFetch.status}
       </h3>
       <h3 className='bug-text-margin'>
-        Person who is working on the bug:{" "}
+        Person who is working on the bug:
         {loadedUserFetch &&
-          loadedUserFetch.name + " " + loadedUserFetch.surname}
+          " " + loadedUserFetch.name + " " + loadedUserFetch.surname}
       </h3>
       <div className='project-item__buttons'>
         <a href={props.repo}>
