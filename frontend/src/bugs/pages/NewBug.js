@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   Card,
   TextField,
@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { useParams } from "react-router";
+import { AuthContext } from "../../shared/context/auth-context";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -29,7 +30,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const NewBug = () => {
   //Bug: severity, priority, description, linkCommit, projectId, status: false (unresolved), userAlocat
   //projectId, status, userAlocat
-
+  const auth = useContext(AuthContext);
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredCommit, setEnteredCommit] = useState("");
   const [enteredSeverity, setEnteredSeverity] = useState("");
@@ -55,8 +56,6 @@ const NewBug = () => {
     };
     fetchUsers();
   }, [sendRequest, projectId]);
-
-  console.log(loadedUsersFetch);
 
   const handleClose = () => {
     setOpen(false);
@@ -106,7 +105,10 @@ const NewBug = () => {
           priority: enteredPriority,
           user: userId,
         }),
-        { "Content-Type": "application/json" }
+        {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
+        }
       );
     } catch (err) {}
 

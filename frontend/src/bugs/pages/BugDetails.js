@@ -19,7 +19,13 @@ const BugDetails = (props) => {
     const fetchBug = async () => {
       try {
         const responseData = await sendRequest(
-          `http://localhost:8000/api/bugs/bug/${bugId}`
+          `http://localhost:8000/api/bugs/bug/${bugId}`,
+          "GET",
+          null,
+          {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
+          }
         );
         setLoadedBugFetch(responseData.bug);
         setStatus(responseData.bug.status);
@@ -39,7 +45,7 @@ const BugDetails = (props) => {
 
     fetchBug();
     fetchUser();
-  }, [sendRequest, bugId, userId]);
+  }, [sendRequest, bugId, userId, auth.token]);
 
   const bugStatusUpdateHandler = async (event) => {
     event.preventDefault();
@@ -52,6 +58,7 @@ const BugDetails = (props) => {
         }),
         {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
         }
       );
     } catch (err) {}
@@ -61,7 +68,12 @@ const BugDetails = (props) => {
     try {
       await sendRequest(
         `http://localhost:8000/api/bugs/bug/${bugId}`,
-        "DELETE"
+        "DELETE",
+        null,
+        {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
+        }
       );
     } catch (err) {}
   };
