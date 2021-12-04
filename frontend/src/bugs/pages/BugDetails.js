@@ -3,10 +3,12 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import DoneIcon from "@mui/icons-material/Done";
 import { Button } from "@mui/material";
 import { useParams } from "react-router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const BugDetails = (props) => {
+  const auth = useContext(AuthContext);
   const bugId = useParams().bugId;
   const [loadedBugFetch, setLoadedBugFetch] = useState();
   const [loadedUserFetch, setLoadedUserFetch] = useState();
@@ -37,13 +39,6 @@ const BugDetails = (props) => {
     fetchUser();
   }, [sendRequest, bugId, userId]);
 
-  console.log("acesta este");
-  console.log(loadedBugFetch);
-  console.log("pauza");
-  if (loadedUserFetch) {
-    console.log(loadedUserFetch);
-  }
-
   return (
     <div className='bug-detail'>
       <div className='center'>
@@ -72,11 +67,13 @@ const BugDetails = (props) => {
             View Commit on Github
           </Button>
         </a>
-        <a href={props.repo}>
-          <Button id='muibtn' startIcon={<DoneIcon />}>
-            Resolve the bug
-          </Button>
-        </a>
+        {userId === auth.userId && (
+          <a href={props.repo}>
+            <Button id='muibtn' startIcon={<DoneIcon />}>
+              Resolve the bug
+            </Button>
+          </a>
+        )}
       </div>
     </div>
   );
