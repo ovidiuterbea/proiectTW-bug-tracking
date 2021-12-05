@@ -65,7 +65,7 @@ const ProjectBugs = (props) => {
           <div className='project-item__buttons'>
             <a href={props.repo}>
               <Button id='muibtn' startIcon={<GitHubIcon />}>
-                view on github
+                View on github
               </Button>
             </a>
           </div>

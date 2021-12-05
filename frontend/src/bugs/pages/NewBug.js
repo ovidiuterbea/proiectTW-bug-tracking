@@ -1,12 +1,12 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import {
   Card,
   TextField,
   CardContent,
   Grid,
   Button,
-  Autocomplete,
+  // Autocomplete,
   Typography,
   InputLabel,
   MenuItem,
@@ -18,15 +18,15 @@ import { useParams } from "react-router";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useHistory } from "react-router-dom";
 
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import Slide from "@mui/material/Slide";
+// import Dialog from "@mui/material/Dialog";
+// import DialogActions from "@mui/material/DialogActions";
+// import DialogContent from "@mui/material/DialogContent";
+// import DialogContentText from "@mui/material/DialogContentText";
+// import Slide from "@mui/material/Slide";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction='up' ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//   return <Slide direction='up' ref={ref} {...props} />;
+// });
 
 const NewBug = () => {
   const auth = useContext(AuthContext);
@@ -37,13 +37,8 @@ const NewBug = () => {
   const history = useHistory();
 
   const { sendRequest } = useHttpClient();
-  const [open, setOpen] = React.useState(false);
 
   const projectId = useParams().projectId;
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const descriptionChangeHandler = (event) => {
     setEnteredDescription(event.target.value);
@@ -64,14 +59,7 @@ const NewBug = () => {
   const formHandler = async (event) => {
     event.preventDefault();
 
-    const newBug = {
-      description: enteredDescription,
-      commit: enteredCommit,
-      severity: enteredSeverity,
-      priority: enteredPriority,
-    };
-
-    setOpen(true);
+    // setOpen(true);
 
     try {
       await sendRequest(
@@ -187,35 +175,6 @@ const NewBug = () => {
                       </Select>
                     </FormControl>
                   </Grid>
-                  {/* <Grid xs={12} item>
-                    <Autocomplete
-                      id='combo-box-existent-users'
-                      options={loadedUsersFetch}
-                      getOptionLabel={(option) =>
-                        option.name + " " + option.surname
-                      }
-                      isOptionEqualToValue={(option, value) =>
-                        option.id === value.id
-                      }
-                      renderInput={(params) => (
-                        <div ref={params.InputProps.ref}>
-                          <TextField
-                            inputProps={{ ...params.inputProps }}
-                            placeholder='Select assigned user'
-                            label='Assigned user'
-                            variant='outlined'
-                            fullWidth
-                            onBlur={enteredAlocUserHandler}
-                          />
-                        </div>
-                      )}
-                      onChange={(event, newValue) => {
-                        if (newValue !== null) {
-                          setUserId(newValue.id);
-                        }
-                      }}
-                    />
-                  </Grid> */}
                   <Grid item xs={12}>
                     <Button
                       type='submit'

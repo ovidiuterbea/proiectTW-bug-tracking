@@ -18,20 +18,20 @@ const ProjectItem = (props) => {
       <div className='project-item__buttons'>
         <a href={props.repo}>
           <Button id='muibtn' startIcon={<GitHubIcon />}>
-            view on github
+            View on github
           </Button>
         </a>
         {props.isTester && (
           <Link to={`/${auth.userId}/projects/${props.id}/newBug`}>
             <Button id='muibtn' startIcon={<BugReportIcon />}>
-              add bug
+              Add bug
             </Button>
           </Link>
         )}
         {!props.isTester && (
           <Link to={`/${auth.userId}/projects/${props.id}/bugs`}>
             <Button id='muibtn' startIcon={<VisibilityIcon />}>
-              view project details
+              View project details
             </Button>
           </Link>
         )}
