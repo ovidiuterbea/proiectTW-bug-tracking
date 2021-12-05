@@ -19,6 +19,7 @@ import Slide from "@mui/material/Slide";
 import { AuthContext } from "../../shared/context/auth-context";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useHistory } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
@@ -34,6 +35,7 @@ const NewProject = () => {
   const [loadedUsersFetch, setLoadedUsersFetch] = useState([]);
   const [userId, setUserId] = useState("");
   const [open, setOpen] = React.useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -98,6 +100,8 @@ const NewProject = () => {
     setEnteredProjectName("");
     setEnteredRepo("");
     setEnteredUser("");
+
+    history.push("/" + auth.userId + "/projects");
   };
 
   return (

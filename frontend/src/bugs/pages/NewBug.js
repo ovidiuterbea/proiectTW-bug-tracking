@@ -16,6 +16,7 @@ import {
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { useParams } from "react-router";
 import { AuthContext } from "../../shared/context/auth-context";
+import { useHistory } from "react-router-dom";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -28,34 +29,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const NewBug = () => {
-  //Bug: severity, priority, description, linkCommit, projectId, status: false (unresolved), userAlocat
-  //projectId, status, userAlocat
   const auth = useContext(AuthContext);
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredCommit, setEnteredCommit] = useState("");
   const [enteredSeverity, setEnteredSeverity] = useState("");
   const [enteredPriority, setEnteredPriority] = useState("");
-  const [enteredAlocUser, setEnteredAlocUser] = useState("");
-  const [userId, setUserId] = useState("");
+  const history = useHistory();
 
-  const [loadedUsersFetch, setLoadedUsersFetch] = useState([]);
   const { sendRequest } = useHttpClient();
   const [open, setOpen] = React.useState(false);
 
   const projectId = useParams().projectId;
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const responseData = await sendRequest(
-          `http://localhost:8000/api/users/project/${projectId}`
-        );
-        console.log(responseData);
-        setLoadedUsersFetch(responseData.users);
-      } catch (err) {}
-    };
-    fetchUsers();
-  }, [sendRequest, projectId]);
 
   const handleClose = () => {
     setOpen(false);
@@ -77,10 +61,6 @@ const NewBug = () => {
     setEnteredPriority(event.target.value);
   };
 
-  const enteredAlocUserHandler = (event) => {
-    setEnteredAlocUser(event.target.value);
-  };
-
   const formHandler = async (event) => {
     event.preventDefault();
 
@@ -89,7 +69,6 @@ const NewBug = () => {
       commit: enteredCommit,
       severity: enteredSeverity,
       priority: enteredPriority,
-      // alocUser: userId,
     };
 
     setOpen(true);
@@ -103,16 +82,14 @@ const NewBug = () => {
           commit: enteredCommit,
           severity: enteredSeverity,
           priority: enteredPriority,
-          // user: userId,
         }),
         {
           "Content-Type": "application/json",
           Authorization: `Bearer ${auth.token}`,
         }
       );
+      history.push("/projects");
     } catch (err) {}
-
-    console.log(newBug);
   };
 
   return (
