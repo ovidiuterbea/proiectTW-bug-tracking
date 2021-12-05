@@ -78,7 +78,7 @@ const getBugsByProjectId = async (req, res, next) => {
     projectWithBugs = await Project.findById(projectId).populate("bugs");
   } catch (err) {
     const error = new HttpError(
-      "Fetching projects failed, please try again later",
+      "Fetching project failed, please try again later",
       500
     );
     return next(error);
@@ -166,51 +166,25 @@ const updateStatus = async (req, res, next) => {
 const getBugsByUserId = async (req, res, next) => {
   const userId = req.params.userid;
 
-  let userWithProjects;
+  let userWithBugs;
   try {
-    userWithProjects = await User.findById(userId).populate("projects");
+    userWithBugs = await User.findById(userId).populate("bugs");
   } catch (err) {
-    console.log(err);
     const error = new HttpError(
-      "Fetching places failed, please try again later",
+      "Fetching user failed, please try again later",
       500
     );
     return next(error);
   }
 
-  if (!userWithProjects || userWithProjects.projects.length === 0) {
+  if (!userWithBugs || userWithBugs.bugs.length === 0) {
     return next(
-      new HttpError("Could not find projects for the provided user id.", 404)
+      new HttpError("Could not find bugs for the provided user id.", 404)
     );
   }
 
-  let projects = userWithProjects.projects.map((project) =>
-    project.toObject({ getters: true })
-  );
-
-  let bugsResponse = [];
-
-  let projectWithBugs;
-  for (const project of projects) {
-    try {
-      projectWithBugs = await Project.findById(project).populate("bugs");
-    } catch (err) {
-      const error = new HttpError(
-        "Fetching bugs failed, please try again later",
-        500
-      );
-      return next(error);
-    }
-    if (!projectWithBugs || projectWithBugs.bugs.length === 0) {
-      continue;
-    }
-    for (const bug of project.bugs) {
-      bugsResponse.push(bug);
-    }
-  }
-
   res.json({
-    bugs: bugsResponse,
+    bugs: userWithBugs.bugs.map((bug) => bug.toObject({ getters: true })),
   });
 };
 
