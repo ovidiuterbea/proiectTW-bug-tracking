@@ -21,7 +21,7 @@ const createBug = async (req, res, next) => {
 
   let searchedProject;
   try {
-    searchedProject = await Project.findById(projectId);
+    searchedProject = await Project.findById(projectId).populate("users");
   } catch (err) {
     const error = new HttpError(
       "Getting the project for you failed, please try again",
@@ -51,6 +51,11 @@ const createBug = async (req, res, next) => {
     await bug.save({ session: sess });
     await searchedProject.bugs.push(bug);
     await searchedProject.save({ session: sess });
+    for (let user of searchedProject.users) {
+      newUser = await User.findById(user);
+      await newUser.bugs.push(bug);
+      await newUser.save({ session: sess });
+    }
     await sess.commitTransaction();
   } catch (err) {
     console.log(err);
