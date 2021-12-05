@@ -9,7 +9,7 @@ const bugSchema = new Schema({
   commit: { type: String, required: true }, // link-ul
   status: { type: String, required: true }, // resolved sau unresolved
   project: { type: mongoose.Types.ObjectId, required: true, ref: "Project" },
-  user: { type: mongoose.Types.ObjectId, required: true, ref: "User" },
+  user: { type: mongoose.Types.ObjectId, required: false, ref: "User" },
 });
 
 module.exports = mongoose.model("Bug", bugSchema);

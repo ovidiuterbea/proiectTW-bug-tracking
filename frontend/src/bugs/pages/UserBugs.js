@@ -13,7 +13,6 @@ const UserBugs = (props) => {
   const auth = useContext(AuthContext);
   const userId = useParams().userId;
   const [loadedBugsFetch, setLoadedBugsFetch] = useState([]);
-  const [loadedProjectFetch, setLoadedProjectFetch] = useState();
   const { sendRequest, isLoading } = useHttpClient();
   useEffect(() => {
     const fetchBugs = async () => {
@@ -31,7 +30,7 @@ const UserBugs = (props) => {
       } catch (err) {}
     };
     fetchBugs();
-  }, [sendRequest, auth.token]);
+  }, [sendRequest, auth.token, userId]);
 
   return (
     <React.Fragment>
@@ -42,11 +41,7 @@ const UserBugs = (props) => {
       </Stack>
       <li className='project-detail'>
         <div className='project-detail-container'>
-          <div className='user-item__info'>
-            <h2 id='projectName'>
-              {loadedProjectFetch && loadedProjectFetch.name}
-            </h2>
-          </div>
+          <div className='user-item__info'></div>
           <div className='project-item__buttons'>
             <a href={props.repo}>
               <Button id='muibtn' startIcon={<GitHubIcon />}>

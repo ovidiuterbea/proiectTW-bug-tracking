@@ -89,7 +89,7 @@ const NewBug = () => {
       commit: enteredCommit,
       severity: enteredSeverity,
       priority: enteredPriority,
-      alocUser: userId,
+      // alocUser: userId,
     };
 
     setOpen(true);
@@ -103,7 +103,7 @@ const NewBug = () => {
           commit: enteredCommit,
           severity: enteredSeverity,
           priority: enteredPriority,
-          user: userId,
+          // user: userId,
         }),
         {
           "Content-Type": "application/json",
@@ -117,7 +117,7 @@ const NewBug = () => {
 
   return (
     <React.Fragment>
-      {open && (
+      {/* {open && (
         <Dialog
           open={open}
           TransitionComponent={Transition}
@@ -133,7 +133,7 @@ const NewBug = () => {
             <Button onClick={handleClose}>Ok</Button>
           </DialogActions>
         </Dialog>
-      )}
+      )} */}
       <div className='App'>
         <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
           Add Bug
@@ -210,7 +210,7 @@ const NewBug = () => {
                       </Select>
                     </FormControl>
                   </Grid>
-                  <Grid xs={12} item>
+                  {/* <Grid xs={12} item>
                     <Autocomplete
                       id='combo-box-existent-users'
                       options={loadedUsersFetch}
@@ -238,7 +238,7 @@ const NewBug = () => {
                         }
                       }}
                     />
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={12}>
                     <Button
                       type='submit'

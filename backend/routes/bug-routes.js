@@ -15,6 +15,8 @@ router.delete("/bug/:bugid", bugController.deleteBug);
 
 router.patch("/bug/:bugid", bugController.updateStatus);
 
+router.patch("/bug/updateUser/:bugid", bugController.updateAlocatedUser);
+
 router.get("/bug/:bugid", bugController.getBugById);
 
 router.get("/user/:userid", bugController.getBugsByUserId);

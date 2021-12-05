@@ -15,7 +15,7 @@ const createBug = async (req, res, next) => {
     );
   }
 
-  const { description, severity, priority, commit, user } = req.body;
+  const { description, severity, priority, commit } = req.body;
 
   const projectId = req.params.projectid;
 
@@ -42,7 +42,7 @@ const createBug = async (req, res, next) => {
     commit,
     status: "UNRESOLVED",
     project: projectId,
-    user,
+    user: null,
   });
 
   try {
@@ -162,7 +162,36 @@ const updateStatus = async (req, res, next) => {
   res.status(200).json({ bug: bug.toObject({ getters: true }) });
 };
 
-// SEMI-TESTAT
+const updateAlocatedUser = async (req, res, next) => {
+  const bugId = req.params.bugid;
+  const { userId } = req.body;
+
+  let bug;
+  try {
+    bug = await Bug.findById(bugId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not find the bug.",
+      500
+    );
+    return next(error);
+  }
+
+  bug.user = userId;
+
+  try {
+    await bug.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update the alocated user of the bug.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ bug: bug.toObject({ getters: true }) });
+};
+
 const getBugsByUserId = async (req, res, next) => {
   const userId = req.params.userid;
 
@@ -219,3 +248,4 @@ exports.deleteBug = deleteBug;
 exports.updateStatus = updateStatus;
 exports.getBugsByUserId = getBugsByUserId;
 exports.getBugById = getBugById;
+exports.updateAlocatedUser = updateAlocatedUser;

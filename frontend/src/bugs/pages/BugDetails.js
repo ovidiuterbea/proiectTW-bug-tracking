@@ -8,6 +8,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+import AddIcon from "@mui/icons-material/Add";
 
 const BugDetails = (props) => {
   const auth = useContext(AuthContext);
@@ -80,6 +81,23 @@ const BugDetails = (props) => {
     } catch (err) {}
   };
 
+  const userAlocatedChangeHandler = async (event) => {
+    event.preventDefault();
+    try {
+      await sendRequest(
+        `http://localhost:8000/api/bugs/bug/updateUser/${bugId}`,
+        "PATCH",
+        JSON.stringify({
+          userId: auth.userId,
+        }),
+        {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.token}`,
+        }
+      );
+    } catch (err) {}
+  };
+
   return (
     <React.Fragment>
       <Stack alignItems='center'>
@@ -106,6 +124,9 @@ const BugDetails = (props) => {
           </h3>
           <h3 className='bug-text-margin'>
             Person who is working on the bug:
+            {loadedBugFetch &&
+              loadedBugFetch.user === null &&
+              " No one is currently working on this bug."}
             {loadedUserFetch &&
               " " + loadedUserFetch.name + " " + loadedUserFetch.surname}
           </h3>
@@ -115,6 +136,16 @@ const BugDetails = (props) => {
                 View Commit on Github
               </Button>
             </a>
+            {loadedBugFetch && loadedBugFetch.user === null && (
+              <Button
+                id='muibtn'
+                startIcon={<AddIcon />}
+                onClick={userAlocatedChangeHandler}
+                style={{ margin: "1rem" }}
+              >
+                Become the alocated user
+              </Button>
+            )}
             {userId === auth.userId && status === "UNRESOLVED" && (
               <Button
                 id='muibtn'

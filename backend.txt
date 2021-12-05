@@ -56,7 +56,7 @@ software pentru a fi monitorizat prin aplicație, specificând repository-ul pro
 tester (TST) la proiect. DONE
 • Ca TST pot înregistra un bug în aplicație. Bug-ul conține o severitate, o prioritate
 de rezolvare, o descriere și un link la commit-ul la care se referă. (add bug) DONE
-• Ca MP pot vedea bug-urile înregistrate pentru proiectele din care fac parte. (3) NOT DONE
+• Ca MP pot vedea bug-urile înregistrate pentru proiectele din care fac parte. (3) DONE
 • Ca MP îmi pot aloca rezolvarea unui bug. Un singur MP poate să aibă alocată
 rezolvarea unui bug la un moment dat. (user in tabela de bug) NOT DONE
 • Ca MP după rezolvarea unui bug pot adăuga un status al rezolvării cu un link la
