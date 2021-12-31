@@ -36,6 +36,8 @@ const NewProject = () => {
   const [userId, setUserId] = useState("");
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
+  const [userWasAdded, setUserWasAdded] = useState(false);
+  const [userNames, setUserNames] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -66,9 +68,22 @@ const NewProject = () => {
   };
 
   const usersChangeHandler = (event) => {
-    setUsersId((arr) => [...arr, userId]);
-    setOpen(true);
+    let user = loadedUsersFetch.filter(
+      (loadedUser) => loadedUser.id === userId
+    );
+    if (!usersId.includes(userId)) {
+      setUsersId((arr) => [...arr, userId]);
+      setOpen(true);
+      setUserWasAdded(true);
+    } else {
+      console.log("Can't add the same user bro :(");
+    }
     console.log(usersId);
+    console.log(user);
+    if (!userNames.includes(user[0].name && user[0].surname)) {
+      setUserNames(userNames + " " + user[0].name + " " + user[0].surname);
+    }
+    console.log(userNames);
   };
 
   const formHandler = async (event) => {
@@ -207,6 +222,16 @@ const NewProject = () => {
                       >
                         Add user
                       </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography
+                        variant='p'
+                        align='center'
+                        // color='#f3f3f3'
+                      >
+                        User currently added :{!userWasAdded && " None"}{" "}
+                        {userWasAdded && userNames}
+                      </Typography>
                     </Grid>
                     <Grid item xs={12}>
                       <Button
