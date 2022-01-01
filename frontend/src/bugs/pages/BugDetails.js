@@ -98,8 +98,6 @@ const BugDetails = (props) => {
     } catch (err) {}
   };
 
-  console.log(loadedBugFetch);
-
   return (
     <React.Fragment>
       <Stack alignItems='center'>
@@ -133,11 +131,13 @@ const BugDetails = (props) => {
               " " + loadedUserFetch.name + " " + loadedUserFetch.surname}
           </h3>
           <div className='project-item__buttons'>
-            <a href={loadedBugFetch.commit} target='_blank'>
-              <Button id='muibtn' startIcon={<GitHubIcon />}>
-                View Commit on Github
-              </Button>
-            </a>
+            {loadedBugFetch && (
+              <a href={loadedBugFetch.commit} target='_blank' rel='noreferrer'>
+                <Button id='muibtn' startIcon={<GitHubIcon />}>
+                  View Commit on Github
+                </Button>
+              </a>
+            )}
             {loadedBugFetch && loadedBugFetch.user === null && (
               <Button
                 id='muibtn'

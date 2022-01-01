@@ -75,8 +75,6 @@ const NewProject = () => {
       setUsersId((arr) => [...arr, userId]);
       setOpen(true);
       setUserWasAdded(true);
-    } else {
-      console.log("Can't add the same user bro :(");
     }
     if (!userNames.includes(user[0].name && user[0].surname)) {
       setUserNames(userNames + " " + user[0].name + " " + user[0].surname);
@@ -92,7 +90,6 @@ const NewProject = () => {
       users: usersId,
     };
 
-    console.log(newProject);
     try {
       await sendRequest(
         "http://localhost:8000/api/projects",

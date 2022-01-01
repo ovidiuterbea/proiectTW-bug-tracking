@@ -1,6 +1,4 @@
 import "./ProjectBugs.css";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import { Button, Link } from "@mui/material";
 import BugList from "../../bugs/components/BugList";
 import { useParams } from "react-router";
 import React, { useEffect, useState, useContext } from "react";
@@ -31,8 +29,6 @@ const UserBugs = (props) => {
     };
     fetchBugs();
   }, [sendRequest, auth.token, userId]);
-
-  console.log(loadedBugsFetch);
 
   return (
     <React.Fragment>

@@ -49,8 +49,6 @@ const Auth = () => {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(enteredEmail);
-    console.log(enteredPassword);
     if (!isLoginMode) {
       try {
         const responseData = await sendRequest(
