@@ -10,13 +10,14 @@ import { useContext } from "react";
 
 const ProjectItem = (props) => {
   const auth = useContext(AuthContext);
+  console.log(props);
   return (
     <li className='project-item'>
       <div className='user-item__info'>
         <h2 id='projectName'>{props.name}</h2>
       </div>
       <div className='project-item__buttons'>
-        <a href={props.repo}>
+        <a href={props.repo} target='_blank'>
           <Button id='muibtn' startIcon={<GitHubIcon />}>
             View on github
           </Button>

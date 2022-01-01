@@ -1,6 +1,6 @@
 import "./ProjectBugs.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { Button } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import BugList from "../../bugs/components/BugList";
 import { useParams } from "react-router";
 import React, { useEffect, useState, useContext } from "react";
@@ -32,6 +32,8 @@ const UserBugs = (props) => {
     fetchBugs();
   }, [sendRequest, auth.token, userId]);
 
+  console.log(loadedBugsFetch);
+
   return (
     <React.Fragment>
       <Stack alignItems='center'>
@@ -40,16 +42,7 @@ const UserBugs = (props) => {
         )}
       </Stack>
       <li className='project-detail'>
-        <div className='project-detail-container'>
-          <div className='user-item__info'></div>
-          <div className='project-item__buttons'>
-            <a href={props.repo}>
-              <Button id='muibtn' startIcon={<GitHubIcon />}>
-                View on github
-              </Button>
-            </a>
-          </div>
-        </div>
+        <div className='project-detail-container'></div>
         {loadedBugsFetch && !isLoading && <BugList items={loadedBugsFetch} />}
       </li>
     </React.Fragment>
