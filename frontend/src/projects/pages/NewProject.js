@@ -84,12 +84,6 @@ const NewProject = () => {
   const formHandler = async (event) => {
     event.preventDefault();
 
-    const newProject = {
-      name: enteredProjectName,
-      repo: enteredRepo,
-      users: usersId,
-    };
-
     try {
       await sendRequest(
         "http://localhost:8000/api/projects",
@@ -213,6 +207,11 @@ const NewProject = () => {
                         color='primary'
                         fullWidth
                         onClick={usersChangeHandler}
+                        style={{
+                          backgroundColor: "#5d5cbc",
+                          height: "80%",
+                          marginTop: "0.3rem",
+                        }}
                       >
                         Add user
                       </Button>
@@ -233,6 +232,7 @@ const NewProject = () => {
                         variant='contained'
                         color='primary'
                         fullWidth
+                        style={{ backgroundColor: "#5d5cbc" }}
                       >
                         Submit
                       </Button>
