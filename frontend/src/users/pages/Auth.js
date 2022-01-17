@@ -177,7 +177,6 @@ const Auth = () => {
                     </Grid>
                     <Grid item xs={12}>
                       <Button
-                        //className='muibtn'
                         type='submit'
                         variant='contained'
                         color='primary'
@@ -193,7 +192,6 @@ const Auth = () => {
             </Card>
             <Typography align='center' style={{ marginTop: "1rem" }}>
               <Button
-                //className='muibtn'
                 type=''
                 variant='contained'
                 color='primary'
