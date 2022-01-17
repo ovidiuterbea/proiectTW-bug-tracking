@@ -100,7 +100,7 @@ const deleteBug = async (req, res, next) => {
 
   let bug;
   try {
-    bug = await Bug.findById(bugId).populate("project");
+    bug = await Bug.findById(bugId).populate("project").populate("user");
   } catch (err) {
     const error = new HttpError(
       "Something went wrong, could not delete the bug.",
@@ -120,6 +120,8 @@ const deleteBug = async (req, res, next) => {
     await bug.remove({ session: sess });
     bug.project.bugs.pull(bug);
     await bug.project.save({ session: sess });
+    bug.user.bugs.pull(bug);
+    await bug.user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
