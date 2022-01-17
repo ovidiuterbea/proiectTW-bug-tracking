@@ -18,16 +18,6 @@ import { useParams } from "react-router";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useHistory } from "react-router-dom";
 
-// import Dialog from "@mui/material/Dialog";
-// import DialogActions from "@mui/material/DialogActions";
-// import DialogContent from "@mui/material/DialogContent";
-// import DialogContentText from "@mui/material/DialogContentText";
-// import Slide from "@mui/material/Slide";
-
-// const Transition = React.forwardRef(function Transition(props, ref) {
-//   return <Slide direction='up' ref={ref} {...props} />;
-// });
-
 const NewBug = () => {
   const auth = useContext(AuthContext);
   const [enteredDescription, setEnteredDescription] = useState("");
@@ -59,8 +49,6 @@ const NewBug = () => {
   const formHandler = async (event) => {
     event.preventDefault();
 
-    // setOpen(true);
-
     try {
       await sendRequest(
         `http://localhost:8000/api/bugs/project/${projectId}`,
@@ -82,23 +70,6 @@ const NewBug = () => {
 
   return (
     <React.Fragment>
-      {/* {open && (
-        <Dialog
-          open={open}
-          TransitionComponent={Transition}
-          onClose={handleClose}
-          aria-describedby='alert-dialog-slide-description'
-        >
-          <DialogContent>
-            <DialogContentText id='alert-dialog-slide-description'>
-              {enteredAlocUser} has been added to solve the bug!
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Ok</Button>
-          </DialogActions>
-        </Dialog>
-      )} */}
       <div className='App'>
         <Typography padding='1rem' variant='h3' align='center' color='#f3f3f3'>
           Add Bug
@@ -181,6 +152,9 @@ const NewBug = () => {
                       variant='contained'
                       color='primary'
                       fullWidth
+                      style={{
+                        backgroundColor: "#5d5cbc",
+                      }}
                     >
                       Submit
                     </Button>
